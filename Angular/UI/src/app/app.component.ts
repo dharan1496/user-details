@@ -55,7 +55,9 @@ export class AppComponent {
     });
     this.enteredFilter.valueChanges.subscribe(
       (value) => {
-        const filteredUser = this.users.filter(user => user[this.selectedFilter.value || ''].toString().includes(value));
+        const filteredUser = this.users.filter(user =>
+          user[this.selectedFilter.value || ''].toString().toLowerCase().includes(value?.toLowerCase())
+        );
         this.refreshUsers(filteredUser);
       });
   }
