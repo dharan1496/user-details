@@ -1,0 +1,16 @@
+<section class="m-32">
+    <h1 mat-dialog-title>Add user</h1>
+    <div mat-dialog-content class="mb-16">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="name" required>
+            <mat-error>
+                Please enter a name
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button class="mr-8" mat-raised-button color="primary" (click)="onAdd()">Add</button>
+        <button mat-raised-button (click)="onCancel()">Cancel</button>
+    </div>
+</section>

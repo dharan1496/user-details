@@ -1,0 +1,69 @@
+<section>
+    <header>
+        <mat-toolbar color="primary">
+            User details
+        </mat-toolbar>
+    </header>
+    <main class="container">
+        <div *ngIf="loader" class="loader"><mat-spinner diameter="120"></mat-spinner></div>
+        <div [hidden]="loader">
+            <div class="add-filter-user mt-24">
+                <div>
+                    <button mat-raised-button color="primary" (click)="openAddDialog($event)">Add User</button>
+                    <button mat-raised-button color="primary" (click)="export()" class="ml-16">Export as Excel</button>
+                </div>
+                <div class="scale-8">
+                    <mat-form-field appearance="fill">
+                        <mat-label>FilterBy</mat-label>
+                        <mat-select [formControl]="selectedFilter">
+                            <mat-option *ngFor="let option of filterOptions" [value]="option.value">
+                                {{option.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="ml-16" *ngIf="selectedFilter.value">
+                        <mat-label>Filter</mat-label>
+                        <input matInput id="filter" [formControl]="enteredFilter">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="mat-elevation-z8 mt-16">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Id </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="button">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="basic" aria-label="button with a edit icon"
+                                (click)="openUpdateDialog(element)" matTooltip="Edit User">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button class="ml-8" mat-icon-button color="warn" (click)="openDeleteDialog(element)"
+                                aria-label="button with a delete icon" matTooltip="Delete User">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </div>
+    </main>
+</section>

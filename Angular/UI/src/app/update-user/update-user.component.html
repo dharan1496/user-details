@@ -1,0 +1,16 @@
+<section class="m-32">
+    <h1 mat-dialog-title>Update user</h1>
+    <div mat-dialog-content class="mb-16">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="name" required>
+            <mat-error *ngIf="name.hasError('required')">
+                Please enter a name
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button class="mr-8" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+        <button mat-raised-button (click)="onCancel()">Cancel</button>
+    </div>
+</section>
